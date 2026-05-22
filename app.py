@@ -2,6 +2,19 @@ import streamlit as st
 from PIL import Image
 import pandas as pd
 import os
+from services.csv_loader import carregar_csv
+from dashboard.sidebar import render_sidebar
+from dashboard.executive import render_executive_dashboard
+from dashboard.operational import render_operational_table
+from dashboard.charts import render_charts
+from dashboard.security import render_security
+from dashboard.compliance import render_compliance
+from services.shift_classifier import (classificar_turno, detectar_antecedencia)
+from services.risk_engine import classificar_risco
+from services.cleaner import limpar_duplicados
+from services.data_cleaning import limpar_eventos
+
+
 
 # ==================================================
 # CONFIGURAÇÃO DA PÁGINA
@@ -43,39 +56,10 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # SIDEBAR
 # ==================================================
 
-if logo:
-    st.sidebar.image(logo, width=260)
-
-st.sidebar.divider()
-
-# UPLOAD
-uploaded_file = st.sidebar.file_uploader(
-    "Importar CSV Genetec",
-    type=["csv"]
+arquivo_selecionado, pesquisa = render_sidebar(
+    logo,
+    UPLOAD_FOLDER
 )
-
-if uploaded_file is not None:
-    file_path = os.path.join(UPLOAD_FOLDER, uploaded_file.name)
-
-    with open(file_path, "wb") as f:
-        f.write(uploaded_file.getbuffer())
-
-    st.sidebar.success("Arquivo salvo com sucesso!")
-
-st.sidebar.divider()
-
-# HISTÓRICO
-arquivos_csv = [
-    f for f in os.listdir(UPLOAD_FOLDER)
-    if f.endswith(".csv")
-]
-
-arquivo_selecionado = st.sidebar.selectbox(
-    "Histórico de arquivos",
-    arquivos_csv if arquivos_csv else ["Nenhum arquivo"]
-)
-
-st.sidebar.divider()
 
 # ==================================================
 # PESQUISA + FILTRO DATA/HORA
@@ -132,22 +116,16 @@ with busca_col2:
 
 df = pd.DataFrame()
 
-if arquivo_selecionado and arquivo_selecionado != "Nenhum arquivo":
-
-    file_path = os.path.join(
-        UPLOAD_FOLDER,
-        arquivo_selecionado
-    )
+if arquivo_selecionado:
 
     try:
 
-        df = pd.read_csv(
-            file_path,
-            sep=",",
-            encoding="utf-8",
-            quotechar='"',
-            skipinitialspace=True
+        df = carregar_csv(
+            UPLOAD_FOLDER,
+            arquivo_selecionado
         )
+
+        df = limpar_duplicados(df)
 
     except Exception as e:
 
@@ -159,7 +137,17 @@ if arquivo_selecionado and arquivo_selecionado != "Nenhum arquivo":
 # FILTROS SOC
 # ==================================================
 
-st.subheader("🔎 Filtros SOC")
+st.markdown("""
+<div class="soc-header">
+
+<span class="soc-icon">🔍</span>
+
+<span class="soc-title">
+FILTROS OPERACIONAIS
+</span>
+
+</div>
+""", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
@@ -181,6 +169,88 @@ with col3:
 
 df_filtrado = df.copy()
 
+# ==================================================
+# PROCESSAMENTO CENTRAL
+# ==================================================
+
+if "Carimbo de tempo do evento" in df_filtrado.columns:
+
+    # CONVERTER DATA
+
+    df_filtrado[
+        "Carimbo de tempo do evento"
+    ] = pd.to_datetime(
+        df_filtrado[
+            "Carimbo de tempo do evento"
+        ],
+        format="%d/%m/%Y %H:%M:%S",
+        errors="coerce"
+    )
+
+    # ==========================================
+    # LIMPEZA INTELIGENTE
+    # ==========================================
+
+    df_filtrado = limpar_eventos(
+        df_filtrado
+    )
+
+    # EXTRAIR HORA
+
+    df_filtrado["Hora"] = df_filtrado[
+        "Carimbo de tempo do evento"
+    ].dt.hour
+
+    # EXTRAIR DATA
+
+    df_filtrado["Data"] = df_filtrado[
+        "Carimbo de tempo do evento"
+    ].dt.date
+
+
+# ==================================================
+# CLASSIFICAÇÃO OPERACIONAL
+# ==================================================
+
+if "Carimbo de tempo do evento" in df_filtrado.columns:
+
+    df_filtrado[
+        "Carimbo de tempo do evento"
+    ] = pd.to_datetime(
+        df_filtrado[
+            "Carimbo de tempo do evento"
+        ],
+        format="%d/%m/%Y %H:%M:%S",
+        errors="coerce"
+    )
+
+    # EXTRAIR HORA
+
+    df_filtrado["Hora"] = df_filtrado[
+        "Carimbo de tempo do evento"
+    ].dt.hour
+
+    # CLASSIFICAR TURNO
+
+    df_filtrado["Turno"] = df_filtrado[
+        "Hora"
+    ].apply(classificar_turno)
+
+    # ==================================================
+    # CLASSIFICAÇÃO DE RISCO
+    # ==================================================
+
+    df_filtrado["Risco"] = df_filtrado.apply(
+        classificar_risco,
+        axis=1
+    )
+
+    # ANTECEDÊNCIA
+
+    df_filtrado["Antecedência"] = df_filtrado[
+        "Hora"
+    ].apply(detectar_antecedencia)
+
 # PESQUISA GLOBAL
 
 # ==================================================
@@ -190,6 +260,14 @@ df_filtrado = df.copy()
 if "Carimbo de tempo do evento" in df_filtrado.columns:
 
     coluna_data = "Carimbo de tempo do evento"
+
+# ==========================================
+# LIMPEZA INTELIGENTE
+# ==========================================
+
+    df_filtrado = limpar_eventos(
+        df_filtrado
+    )
 
     # CONVERTER PARA DATETIME
 
@@ -245,48 +323,56 @@ if filtro_evento != "Todos" and "Evento" in df_filtrado.columns:
     ]
 
 # ==================================================
-# DASHBOARD SOC
+# ABAS ENTERPRISE
 # ==================================================
 
-st.subheader("📡 Eventos em Tempo Quase Real")
-
-# Remove colunas totalmente vazias
-df_filtrado = df_filtrado.dropna(
-    axis=1,
-    how="all"
-)
-
-if "Carimbo de tempo do evento" in df_filtrado.columns:
-
-    st.dataframe(
-        df_filtrado.sort_values(
-            "Carimbo de tempo do evento",
-            ascending=False
-        ),
-        width="stretch",
-        hide_index=True,
-        height=500
-    )
-
-else:
-
-    st.dataframe(
-        df_filtrado,
-        width="stretch",
-        hide_index=True,
-        height=500
-    )
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "📊 Executivo",
+    "📡 Operacional",
+    "🛡️ Segurança",
+    "📋 Compliance",
+    "📈 Analytics"
+])
 
 # ==================================================
-# RESUMO
+# EXECUTIVO
 # ==================================================
 
-st.subheader("Resumo Operacional")
+with tab1:
 
-st.info("""
-Sentinel Access monitora eventos operacionais
-exportados do Genetec Security Desk.
-""")
+    render_executive_dashboard(df_filtrado)
+
+# ==================================================
+# OPERACIONAL
+# ==================================================
+
+with tab2:
+
+    render_operational_table(df_filtrado)
+
+# ==================================================
+# SEGURANÇA
+# ==================================================
+
+with tab3:
+
+    render_security(df_filtrado)
+
+# ==================================================
+# COMPLIANCE
+# ==================================================
+
+with tab4:
+
+    render_compliance(df_filtrado)
+
+# ==================================================
+# ANALYTICS
+# ==================================================
+
+with tab5:
+
+    render_charts(df_filtrado)
 
 
 # ==================================================

@@ -76,8 +76,8 @@ section[data-testid="stSidebar"] > div {
 ================================================== */
 
 [data-testid="stSidebar"] .stImage {
-    margin-top: -70px;
-    margin-bottom: -55px;
+    margin-top: -35px;
+    margin-bottom: -25px;
     margin-left: -8px;
 }
 
@@ -184,29 +184,6 @@ div[data-testid="stVerticalBlock"] {
     padding-top: 0rem !important;
 }
 
-/* ==================================================
-   REMOVE ESPAÇO GERAL
-================================================== */
-
-.block-container {
-    padding-top: -1rem !important;
-}
-
-/* ==================================================
-   FOOTER
-================================================== */
-
-.footer {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    color: gray;
-    font-size: 13px;
-    
-    z-index: 999;
-}
 
 /* ==================================================
    FOOTER FIXO
@@ -232,4 +209,126 @@ section[data-testid="stSidebar"] button {
 
 section[data-testid="stSidebar"] input {
     border-radius: 8px;
+}
+
+/* ==================================================
+   TABS
+================================================== */
+
+[data-testid="stTabs"] {
+
+    margin-top: 0.5rem;
+}
+
+[data-testid="stTabs"] button {
+
+    font-size: 13px !important;
+
+    color: #B0B7C3 !important;
+
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+
+    border-radius: 6px 6px 0px 0px;
+
+    transition: 0.2s;
+}
+
+[data-testid="stTabs"] button:hover {
+
+    color: white !important;
+}
+
+[data-testid="stTabs"] button[aria-selected="true"] {
+
+    color: #00BFFF !important;
+
+    border-bottom: 2px solid #00BFFF !important;
+}
+
+/* ==================================================
+   DATAFRAME
+================================================== */
+
+[data-testid="stDataFrame"] {
+
+    border: 1px solid #2D333B;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+/* ==================================================
+   PLOTLY
+================================================== */
+
+.js-plotly-plot {
+
+    border: 1px solid #2D333B;
+
+    border-radius: 12px;
+
+    padding: 8px;
+
+    background-color: #111827;
+}
+
+/* ==================================================
+   INPUTS
+================================================== */
+
+.stTextInput input {
+
+    height: 38px !important;
+}
+
+.stSelectbox div[data-baseweb="select"] {
+
+    min-height: 38px !important;
+}
+
+/* ==================================================
+   SOC HEADER
+================================================== */
+
+.soc-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 0.8rem;
+
+    margin-top: 0.3rem;
+}
+
+/* ==================================================
+   SOC ICON
+================================================== */
+
+.soc-icon {
+
+    color: #00BFFF;
+
+    font-size: 14px;
+
+    text-shadow: 0px 0px 10px rgba(0,191,255,0.6);
+}
+
+/* ==================================================
+   SOC TITLE
+================================================== */
+
+.soc-title {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    color: #D1D5DB;
 }
