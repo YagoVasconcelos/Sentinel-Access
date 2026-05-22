@@ -1,36 +1,48 @@
 # 🛡️ Sentinel Access
 
-Enterprise Operational Intelligence Platform for Access Control Analytics.
+Plataforma Analítica Operacional para Controle de Acesso.
 
-Developed by Yago Marinho.
-
----
-
-# Overview
-
-Sentinel Access is an enterprise analytics platform designed for operational analysis of physical access control events exported from Genetec Security Desk.
-
-The platform enables:
-
-- Operational analytics
-- Access flow investigation
-- Department movement analysis
-- Shift behavior monitoring
-- Security compliance insights
-- Historical event research
-- Corporate access intelligence
+Desenvolvido por Yago Marinho.
 
 ---
 
-# Main Features
+# Sobre o Projeto
 
-## 📥 CSV Import
+O Sentinel Access é uma plataforma desenvolvida para análise operacional de eventos de controle de acesso exportados do Genetec Security Desk.
 
-Import CSV files exported directly from:
+O sistema permite:
+
+- análise operacional;
+- investigação de acessos;
+- monitoramento de fluxo;
+- análise comportamental;
+- pesquisa inteligente;
+- visualização analítica;
+- gestão operacional de acessos.
+
+---
+
+# Objetivo
+
+Centralizar e transformar dados de controle de acesso em informações estratégicas para:
+
+- gestores;
+- segurança patrimonial;
+- compliance;
+- operação industrial;
+- inteligência operacional.
+
+---
+
+# Principais Funcionalidades
+
+## 📥 Importação de CSV
+
+Importação de arquivos exportados do:
 
 - Genetec Security Desk 5.6
 
-Uploaded files are automatically stored in:
+Os arquivos enviados são armazenados automaticamente em:
 
 ```text
 data/uploads
@@ -38,43 +50,45 @@ data/uploads
 
 ---
 
-## 🔍 Intelligent Search
+## 🔍 Pesquisa Inteligente
 
-Search by:
+Permite pesquisa por:
 
-- Employee Name
-- Badge ID
-- Door
-- Department
-- Company
-- Credential
-- Supervisor
-
----
-
-## 📊 Operational Dashboard
-
-Real-time analytical visualization from imported datasets:
-
-- Total Access Events
-- Active Employees
-- Monitored Doors
-- Operational Indicators
+- nome;
+- matrícula;
+- porta;
+- empresa;
+- departamento;
+- gestor;
+- credencial.
 
 ---
 
-## 🏢 Designed For
+## 📊 Dashboard Operacional
 
-- Industrial Facilities
-- Corporate Security Operations
-- Access Control Management
-- Multinational Companies
-- Compliance Teams
-- Operational Intelligence Centers
+Visualização analítica dos eventos:
+
+- total de acessos;
+- funcionários ativos;
+- portas monitoradas;
+- indicadores operacionais;
+- eventos registrados.
 
 ---
 
-# Current Architecture
+## 🏭 Aplicação
+
+Projetado para:
+
+- indústrias;
+- centros operacionais;
+- empresas multinacionais;
+- controle de acesso corporativo;
+- operações de segurança.
+
+---
+
+# Estrutura do Projeto
 
 ```text
 Sentinel-Access/
@@ -96,51 +110,51 @@ Sentinel-Access/
 
 ---
 
-# Technologies
+# Tecnologias Utilizadas
 
 - Python
 - Streamlit
 - Pandas
-- PySpark (Upcoming)
-- Plotly (Upcoming)
+- PySpark (em desenvolvimento)
+- Plotly (em desenvolvimento)
 
 ---
 
-# Upcoming Features
+# Funcionalidades Futuras
 
-## Analytics Engine
+## Engine Analítica
 
-- Shift analysis
-- 12x36 scale detection
-- Duplicate access filtering
-- Early access detection
-- Security anomalies
-- Operational heatmaps
-
----
-
-## Enterprise Features
-
-- User authentication
-- Administrative panel
-- PDF export
-- Executive reports
-- KPI dashboards
-- Historical analytics
+- análise de turnos;
+- detecção de duplicidade;
+- análise 12x36;
+- detecção de acessos antecipados;
+- anomalias operacionais;
+- análise comportamental.
 
 ---
 
-# Installation
+## Recursos Corporativos
 
-## Clone Repository
+- autenticação;
+- painel administrativo;
+- exportação PDF;
+- relatórios executivos;
+- dashboards avançados;
+- histórico operacional.
+
+---
+
+# Instalação
+
+## Clonar repositório
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Sentinel-Access.git
+git clone https://github.com/SEU_USUARIO/Sentinel-Access.git
 ```
 
 ---
 
-## Create Virtual Environment
+## Criar ambiente virtual
 
 ```bash
 python -m venv venv
@@ -148,7 +162,7 @@ python -m venv venv
 
 ---
 
-## Activate Environment
+## Ativar ambiente virtual
 
 ### Windows
 
@@ -164,7 +178,7 @@ source venv/bin/activate
 
 ---
 
-## Install Dependencies
+## Instalar dependências
 
 ```bash
 pip install -r requirements.txt
@@ -172,7 +186,7 @@ pip install -r requirements.txt
 
 ---
 
-# Run Application
+# Executar o Sistema
 
 ```bash
 streamlit run app.py
@@ -180,30 +194,28 @@ streamlit run app.py
 
 ---
 
-# Data Structure
+# Estrutura Esperada do CSV
 
-Expected CSV structure:
-
-| Field | Description |
+| Campo | Descrição |
 |---|---|
-| Evento | Access Event |
-| Porta | Door |
-| Lado | Reader Direction |
-| Matricula | Employee ID |
-| Nome | Employee Name |
-| Sobrenome | Last Name |
-| Empresa | Company |
-| Credencial | Credential |
-| DataHora | Event Timestamp |
-| Departamento | Department |
-| Gestor | Supervisor |
+| Evento | Evento de acesso |
+| Porta | Porta/catraca |
+| Lado | Direção do leitor |
+| Matricula | Matrícula |
+| Nome | Nome |
+| Sobrenome | Sobrenome |
+| Empresa | Empresa |
+| Credencial | Credencial |
+| DataHora | Data e hora |
+| Departamento | Departamento |
+| Gestor | Gestor responsável |
 
 ---
 
-# Copyright
+# Direitos Autorais
 
 © 2026 Sentinel Access
 
-Developed by Yago Marinho.
+Desenvolvido por Yago Marinho.
 
-All rights reserved.
+Todos os direitos reservados.
