@@ -1,0 +1,7 @@
+Copyright © 2026 Yago Marinho
+
+All rights reserved.
+
+This software and associated documentation files may not be copied,
+modified, distributed, or used commercially without explicit permission
+from the author.

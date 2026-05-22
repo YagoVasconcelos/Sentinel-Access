@@ -1,0 +1,235 @@
+/* ==================================================
+   SENTINEL ACCESS - ENTERPRISE THEME
+================================================== */
+
+html, body, [class*="css"] {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0E1117;
+    color: white;
+}
+
+/* ==================================================
+   APP BACKGROUND
+================================================== */
+
+.stApp {
+    background-color: #0E1117;
+}
+
+/* ==================================================
+   REMOVE ESPAÇAMENTOS GERAIS
+================================================== */
+
+.block-container {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+/* ==================================================
+   REMOVE GAP ENTRE ELEMENTOS
+================================================== */
+
+.element-container {
+    margin-bottom: 0rem !important;
+}
+
+/* ==================================================
+   HEADER STREAMLIT
+================================================== */
+
+header[data-testid="stHeader"] {
+    height: 0rem;
+    background: transparent;
+}
+
+/* ==================================================
+   TOOLBAR SUPERIOR
+================================================== */
+
+[data-testid="stToolbar"] {
+    right: 1rem;
+}
+
+/* ==================================================
+   SIDEBAR
+================================================== */
+
+section[data-testid="stSidebar"] {
+    background-color: #161B22;
+    border-right: 1px solid #2D333B;
+}
+
+/* ==================================================
+   SIDEBAR CONTENT
+================================================== */
+
+section[data-testid="stSidebar"] > div {
+    padding-top: 0rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+/* ==================================================
+   SIDEBAR LOGO
+================================================== */
+
+[data-testid="stSidebar"] .stImage {
+    margin-top: -70px;
+    margin-bottom: -55px;
+    margin-left: -8px;
+}
+
+/* ==================================================
+   TITLES
+================================================== */
+
+h1, h2, h3 {
+    color: white;
+}
+
+/* ==================================================
+   MAIN LOGO
+================================================== */
+
+.main-logo {
+    margin-top: -30px;
+    margin-bottom: -60px;
+    margin-left: -5px;
+}
+
+/* ==================================================
+   METRIC CARDS
+================================================== */
+
+div[data-testid="metric-container"] {
+    background-color: #161B22;
+    border: 1px solid #2D333B;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0,191,255,0.08);
+}
+
+/* ==================================================
+   METRIC LABEL
+================================================== */
+
+div[data-testid="metric-container"] label {
+    color: #B0B7C3 !important;
+}
+
+/* ==================================================
+   METRIC VALUE
+================================================== */
+
+div[data-testid="metric-container"] div {
+    color: white;
+}
+
+/* ==================================================
+   BUTTONS
+================================================== */
+
+.stButton > button {
+    background-color: #00BFFF;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+.stButton > button:hover {
+    background-color: #009ACD;
+}
+
+/* ==================================================
+   DIVIDERS
+================================================== */
+
+hr {
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    border-color: #2D333B;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+    visibility: hidden;
+}
+
+/* ==================================================
+   REMOVE ESPAÇO SUPERIOR
+================================================== */
+
+section.main > div:first-child {
+    padding-top: 0rem;
+}
+
+/* ==================================================
+   REMOVE MARGEM DOS ELEMENTOS
+================================================== */
+
+div[data-testid="stVerticalBlock"] {
+    gap: 0rem;
+}
+
+/* ==================================================
+   REMOVE ESPAÇO TOPO SIDEBAR
+================================================== */
+
+[data-testid="stSidebarNav"] {
+    padding-top: 0rem !important;
+}
+
+/* ==================================================
+   REMOVE ESPAÇO GERAL
+================================================== */
+
+.block-container {
+    padding-top: -1rem !important;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    color: gray;
+    font-size: 13px;
+    
+    z-index: 999;
+}
+
+/* ==================================================
+   FOOTER FIXO
+================================================== */
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: gray;
+    font-size: 13px;
+
+    z-index: 999;
+}
+
+section[data-testid="stSidebar"] button {
+    border-radius: 8px;
+    height: 38px;
+    
+}
+
+section[data-testid="stSidebar"] input {
+    border-radius: 8px;
+}
