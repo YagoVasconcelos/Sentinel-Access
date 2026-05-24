@@ -144,7 +144,7 @@ Sentinel-Access/
 
 ---
 
-# Instalação
+# Instalação 1
 
 ## Clonar repositório
 
@@ -186,6 +186,10 @@ pip install -r requirements.txt
 
 ---
 
+# Instalação 2
+.\instalar.ps1
+
+---
 # Executar o Sistema
 
 ```bash
