@@ -6,13 +6,13 @@ import pandas as pd
 
 def limpar_duplicados(df):
 
-    if "Carimbo de tempo do evento" not in df.columns:
+    if "DataHora" not in df.columns:
         return df
 
     # CONVERTER DATA
 
-    df["Carimbo de tempo do evento"] = pd.to_datetime(
-        df["Carimbo de tempo do evento"],
+    df["DataHora"] = pd.to_datetime(
+        df["DataHora"],
         format="%d/%m/%Y %H:%M:%S",
         errors="coerce"
     )
@@ -20,7 +20,7 @@ def limpar_duplicados(df):
     # ORDENAR
 
     df = df.sort_values(
-        by="Carimbo de tempo do evento"
+        by="DataHora"
     )
 
     # CRIAR CHAVE
@@ -35,7 +35,7 @@ def limpar_duplicados(df):
 
     df["Dif_Segundos"] = (
         df.groupby("Chave_Evento")[
-            "Carimbo de tempo do evento"
+            "DataHora"
         ]
         .diff()
         .dt.total_seconds()

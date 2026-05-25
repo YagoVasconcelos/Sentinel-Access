@@ -15,18 +15,18 @@ def detectar_acessos_rapidos(df):
 
     if (
         "Nome" not in df.columns or
-        "Carimbo de tempo do evento" not in df.columns
+        "DataHora" not in df.columns
     ):
         return pd.DataFrame()
 
     for nome, grupo in df.groupby("Nome"):
 
         grupo = grupo.sort_values(
-            "Carimbo de tempo do evento"
+            "DataHora"
         )
 
         grupo["Diferença"] = grupo[
-            "Carimbo de tempo do evento"
+            "DataHora"
         ].diff().dt.total_seconds()
 
         suspeitos = grupo[

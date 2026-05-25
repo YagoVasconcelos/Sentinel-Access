@@ -124,7 +124,7 @@ if arquivo_selecionado:
             UPLOAD_FOLDER,
             arquivo_selecionado
         )
-
+        
         df = limpar_duplicados(df)
 
     except Exception as e:
@@ -173,15 +173,15 @@ df_filtrado = df.copy()
 # PROCESSAMENTO CENTRAL
 # ==================================================
 
-if "Carimbo de tempo do evento" in df_filtrado.columns:
+if "DataHora" in df_filtrado.columns:
 
     # CONVERTER DATA
 
     df_filtrado[
-        "Carimbo de tempo do evento"
+        "DataHora"
     ] = pd.to_datetime(
         df_filtrado[
-            "Carimbo de tempo do evento"
+            "DataHora"
         ],
         format="%d/%m/%Y %H:%M:%S",
         errors="coerce"
@@ -198,13 +198,13 @@ if "Carimbo de tempo do evento" in df_filtrado.columns:
     # EXTRAIR HORA
 
     df_filtrado["Hora"] = df_filtrado[
-        "Carimbo de tempo do evento"
+        "DataHora"
     ].dt.hour
 
     # EXTRAIR DATA
 
     df_filtrado["Data"] = df_filtrado[
-        "Carimbo de tempo do evento"
+        "DataHora"
     ].dt.date
 
 
@@ -212,13 +212,13 @@ if "Carimbo de tempo do evento" in df_filtrado.columns:
 # CLASSIFICAÇÃO OPERACIONAL
 # ==================================================
 
-if "Carimbo de tempo do evento" in df_filtrado.columns:
+if "DataHora" in df_filtrado.columns:
 
     df_filtrado[
-        "Carimbo de tempo do evento"
+        "DataHora"
     ] = pd.to_datetime(
         df_filtrado[
-            "Carimbo de tempo do evento"
+            "DataHora"
         ],
         format="%d/%m/%Y %H:%M:%S",
         errors="coerce"
@@ -227,7 +227,7 @@ if "Carimbo de tempo do evento" in df_filtrado.columns:
     # EXTRAIR HORA
 
     df_filtrado["Hora"] = df_filtrado[
-        "Carimbo de tempo do evento"
+        "DataHora"
     ].dt.hour
 
     # CLASSIFICAR TURNO
@@ -257,9 +257,9 @@ if "Carimbo de tempo do evento" in df_filtrado.columns:
 # FILTRO DATA/HORA
 # ==================================================
 
-if "Carimbo de tempo do evento" in df_filtrado.columns:
+if "DataHora" in df_filtrado.columns:
 
-    coluna_data = "Carimbo de tempo do evento"
+    coluna_data = "DataHora"
 
 # ==========================================
 # LIMPEZA INTELIGENTE

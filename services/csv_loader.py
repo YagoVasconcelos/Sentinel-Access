@@ -65,10 +65,7 @@ def carregar_csv(upload_folder, arquivo):
     # LIMPAR NOMES DAS COLUNAS
     # ==================================================
 
-    df.columns = [
-        str(col).strip()
-        for col in df.columns
-    ]
+    df.columns = [ str(col) .strip() .replace("\ufeff", "") .replace("¹", "") .replace(" ", " ") for col in df.columns ]
 
     # ==================================================
     # REMOVER DUPLICIDADE DE CABEÇALHO
@@ -87,6 +84,48 @@ def carregar_csv(upload_folder, arquivo):
         if primeira_linha == colunas:
 
             df = df.iloc[1:]
+
+    # ==================================================
+    # PADRONIZAÇÃO ENTERPRISE
+    # ==================================================
+
+    df.columns = df.columns.str.strip()
+
+    df.rename(columns={
+
+        "Matricula (Titular de cartão)":
+            "Matrícula",
+
+        "Matrícula (Titular de cartão)":
+            "Matrícula",
+
+        "Empresa. (Titular de cartão)":
+            "Empresa",
+
+        "Empresa (Titular de cartão)":
+            "Empresa",
+
+        "Credencial":
+            "Credencial",
+
+        "Carimbo de tempo do evento":
+            "DataHora",
+
+        "*OBS (Titular de cartão)":
+            "OBS",
+
+        "Departamento (Titular de cartão)":
+            "Departamento",
+
+        "Gestor da Área (Titular de cartão)":
+            "Gestor",
+
+        "SITUAÇÃO (Titular de cartão)":
+            "Situação"
+
+    }, inplace=True)
+
+    print(df.columns.tolist())
 
     # ==================================================
     # RESET INDEX

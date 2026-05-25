@@ -14,7 +14,7 @@ def limpar_eventos(df):
     # ==========================================
 
     df = df.sort_values(
-        "Carimbo de tempo do evento"
+        "DataHora"
     )
 
     # ==========================================
@@ -23,7 +23,7 @@ def limpar_eventos(df):
 
     df["Diferença Segundos"] = (
         df.groupby("Nome")[
-            "Carimbo de tempo do evento"
+            "DataHora"
         ]
         .diff()
         .dt.total_seconds()
