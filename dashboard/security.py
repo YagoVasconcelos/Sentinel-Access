@@ -67,7 +67,7 @@ def render_security(df):
 
         st.dataframe(
             acessos_rapidos,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             height=250
         )
@@ -125,7 +125,7 @@ def render_security(df):
             # Renderiza a tabela final estruturada com Nome, Sobrenome, Quantidade e Classificação
             st.dataframe(
                 df_exibicao[['Nome', 'Sobrenome', 'Quantidade', 'Classificação']],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
                 height=250
             )
@@ -134,7 +134,7 @@ def render_security(df):
             # Caso a estrutura de colunas do retorno seja diferente, exibe o dataframe padrão modificado
             st.dataframe(
                 multiplos_acessos,
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
                 height=250
             )

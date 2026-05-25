@@ -8,9 +8,7 @@ import pandas as pd
 # ==================================================
 
 def render_charts(df):
-
-    st.subheader("📈 Analytics Operacional")
-
+ 
     # ==================================================
     # VALIDAR DATA
     # ==================================================
@@ -34,7 +32,7 @@ def render_charts(df):
 
         st.markdown("---")
 
-        st.subheader("🔥 Heatmap Operacional")
+        st.subheader("🔥 Mapa de Calor Operacional")
 
         # Agrupamento estruturado
         heatmap_data = (
@@ -108,7 +106,7 @@ def render_charts(df):
 
         st.plotly_chart(
             fig_heatmap,
-            use_container_width=True,
+            width="stretch",
             key="heatmap_operacional"
         )
 
@@ -160,7 +158,7 @@ def render_charts(df):
 
     st.plotly_chart(
         fig_hora,
-        use_container_width=True,
+        width="stretch",
         key="grafico_fluxo_hora"
     )
 
@@ -203,6 +201,6 @@ def render_charts(df):
 
         st.plotly_chart(
             fig_porta,
-            use_container_width=True,
+            width="stretch",
             key="grafico_fluxo_porta"
         )

@@ -33,8 +33,10 @@ st.set_page_config(
 
 def load_css():
     if os.path.exists("assets/styles.css"):
-        with open("assets/styles.css") as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+        with open("assets/styles.css", "r", encoding="utf-8") as f:
+            css_content = f.read()
+            # Injeta o CSS com uma tag style única para burlar qualquer cache
+            st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
 
 load_css()
 
@@ -56,59 +58,11 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # SIDEBAR
 # ==================================================
 
-arquivo_selecionado, pesquisa = render_sidebar(
+# Voltamos ao padrão limpo: a inteligência vai rodar direto lá dentro
+arquivo_selecionado, pesquisa, filtro_data, filtro_hora = render_sidebar(
     logo,
     UPLOAD_FOLDER
 )
-
-# ==================================================
-# PESQUISA + FILTRO DATA/HORA
-# ==================================================
-
-busca_col1, busca_col2 = st.sidebar.columns([5, 1])
-
-with busca_col1:
-
-    pesquisa = st.text_input(
-        "Pesquisar por",
-        placeholder="Nome, matrícula, porta..."
-    )
-
-with busca_col2:
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    with st.popover("📅"):
-
-        usar_data = st.checkbox("Usar Data")
-
-        if usar_data:
-
-            filtro_data = st.date_input(
-                "Selecionar Data"
-            )
-
-        else:
-            filtro_data = None
-
-        usar_hora = st.checkbox("Usar Hora")
-
-        if usar_hora:
-
-            filtro_hora = st.text_input(
-                "Hora",
-                placeholder="Ex: 02:18 ou 14:30"
-            )
-
-        else:
-            filtro_hora = None
-
-        # LIMPAR FILTROS
-
-        if st.button("Limpar"):
-
-            st.rerun()
-
 
 # ==================================================
 # LEITURA CSV
@@ -327,11 +281,11 @@ if filtro_evento != "Todos" and "Evento" in df_filtrado.columns:
 # ==================================================
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "📊 Executivo",
-    "📡 Operacional",
-    "🛡️ Segurança",
-    "📋 Compliance",
-    "📈 Analytics"
+    "📊 Acessos Geral",
+    "📡 Detalhes Operacionais",
+    "🛡️ Segurança Anàlise",
+    "📋 Gestão de Não-Conformidade",
+    "📈 Analytics Operacional"
 ])
 
 # ==================================================

@@ -125,7 +125,7 @@ def carregar_csv(upload_folder, arquivo):
 
     }, inplace=True)
 
-    print(df.columns.tolist())
+    #print(df.columns.tolist())
 
     # ==================================================
     # RESET INDEX

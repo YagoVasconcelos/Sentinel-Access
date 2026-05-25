@@ -332,3 +332,19 @@ section[data-testid="stSidebar"] input {
 
     color: #D1D5DB;
 }
+
+/* Remove o espaço em branco gigante no topo da sidebar */
+[data-testid="stSidebarUserContent"] {
+    padding-top: 0.5rem !important;
+}
+
+/* Remove os recuos padrões do contêiner central do Streamlit */
+[data-testid="stAppViewBlockContainer"] {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+/* Força os elementos de colunas a alinharem perfeitamente por baixo */
+div[data-testid="stHorizontalBlock"] {
+    align-items: end !important;
+}

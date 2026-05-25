@@ -171,7 +171,7 @@ def render_executive_dashboard(df):
 
         st.plotly_chart(
             fig,
-            use_container_width=True,
+            width="stretch",
             key="grafico_empresas"
         )
 
@@ -198,7 +198,7 @@ def render_executive_dashboard(df):
 
         st.dataframe(
             presenca[colunas_exibir],
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             height=500
         )
